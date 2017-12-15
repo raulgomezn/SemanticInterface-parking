@@ -1,0 +1,77 @@
+<duke>
+    <schema>
+        <threshold>0.75</threshold>
+        <property type="id">
+            <name>ID</name>
+        </property>
+        <property>
+            <name>NAME</name>
+            <comparator>no.priv.garshol.duke.comparators.Levenshtein</comparator>
+            <low>0.3</low>
+            <high>0.6</high>
+        </property>
+        <property>
+            <name>NFIELDS</name>
+            <comparator>no.priv.garshol.duke.comparators.ExactComparator</comparator>
+            <low>0.3</low>
+            <high>0.6</high>
+        </property>
+        <property>
+            <name>FIELDS</name>
+            <comparator>no.priv.garshol.duke.comparators.QGramComparator</comparator>
+            <low>0.4</low>
+            <high>0.7</high>
+        </property>
+        <property>
+            <name>TYPES</name>
+            <comparator>no.priv.garshol.duke.comparators.QGramComparator</comparator>
+            <low>0.3</low>
+            <high>0.6</high>
+        </property>
+    </schema>
+
+    <database class="no.priv.garshol.duke.databases.InMemoryDatabase">
+    </database>
+
+    <group>
+        <csv>
+            <param name="input-file" value="virtualTest.csv"/>
+
+            <column name="method"
+                    property="ID"/>
+            <column name="propertyName"
+                    cleaner="no.priv.garshol.duke.cleaners.LowerCaseNormalizeCleaner"
+                    property="NAME"/>
+            <column name="bodyFields"
+                    property="NFIELDS"/>
+            <column name="bodyLabels"
+                    cleaner="no.priv.garshol.duke.cleaners.LowerCaseNormalizeCleaner"
+                    property="FIELDS"/>
+            <column name="dataTypes"
+                    cleaner="no.priv.garshol.duke.cleaners.LowerCaseNormalizeCleaner"
+                    property="TYPES"/>
+
+        </csv>
+    </group>
+
+    <group>
+        <csv>
+            <param name="input-file" value="fisicaTest.csv"/>
+
+            <column name="deviceID"
+                    property="ID"/>
+            <column name="propertyName"
+                    cleaner="no.priv.garshol.duke.cleaners.LowerCaseNormalizeCleaner"
+                    property="NAME"/>
+            <column name="bodyFields"
+                    property="NFIELDS"/>
+            <column name="bodyLabels"
+                    cleaner="no.priv.garshol.duke.cleaners.LowerCaseNormalizeCleaner"
+                    property="FIELDS"/>
+            <column name="dataTypes"
+                    cleaner="no.priv.garshol.duke.cleaners.LowerCaseNormalizeCleaner"
+                    property="TYPES"/>
+
+        </csv>
+    </group>
+</duke>
